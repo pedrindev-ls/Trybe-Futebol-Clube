@@ -23,14 +23,6 @@ export default class LoginService {
 
     this._passwordCheck.comparePassword(password, item.getDataValue('password'));
 
-    // const checkPassword = compareSync(password, item.getDataValue('password'));
-
-    // if (!checkPassword) {
-    //   const error: ErrorInterface = new Error('Incorrect email or password');
-    //   error.status = 401;
-    //   throw error;
-    // }
-
     const token = this._jwtService.createToken({
       id: item.getDataValue('id'),
       role: item.getDataValue('role'),

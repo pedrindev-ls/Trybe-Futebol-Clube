@@ -7,4 +7,10 @@ export default class JwtService {
     const token = jwt.sign(data, secret);
     return token;
   };
+
+  validateToken = (token: string): jwt.JwtPayload => {
+    const secret = process.env.JWT_SECRET as string;
+    const validation = jwt.verify(token, secret);
+    return validation as jwt.JwtPayload;
+  };
 }
