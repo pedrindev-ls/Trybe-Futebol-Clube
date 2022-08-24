@@ -21,13 +21,13 @@ export default class LoginService {
       throw error;
     }
 
-    this._passwordCheck.comparePassword(password, item.getDataValue('password'));
+    this._passwordCheck.comparePassword(password, item.password);
 
     const token = this._jwtService.createToken({
-      id: item.getDataValue('id'),
-      role: item.getDataValue('role'),
-      email: item.getDataValue('email'),
-      username: item.getDataValue('username'),
+      id: item.id,
+      role: item.role,
+      email: item.email,
+      username: item.username,
     });
 
     return token;
