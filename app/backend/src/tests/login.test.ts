@@ -45,11 +45,18 @@ describe('Testando se na rota /login', () => {
       email: usersMock.email,
       username: usersMock.username
     })
-    const response = await chai.request(app).get('/login/validate').set({authorization: tokenMock})
+    const response = await chai.request(app).get('/login/validate').set({ authorization: tokenMock })
 
     expect(response.status).to.equal(200)
-    // const [roleInfo] = response.body
+  })
+  it('retorna um erro quando enviado com ausencia de dados(sem email)', async () => {
+    const response = await chai.request(app).post('/login').send({ password: 'secret_user' })
 
-    // expect(roleInfo.role).to.equal('user')
+    expect(response.status).to.equal(400)
+  })
+  it('retorna um erro quando enviado com ausencia de dados(sem token)', async () => {
+    const response = await chai.request(app).get('/login/validate').set({  })
+
+    expect(response.status).to.equal(401)
   })
 })
