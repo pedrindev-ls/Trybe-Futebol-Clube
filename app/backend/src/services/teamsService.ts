@@ -7,4 +7,9 @@ export default class TeamsService {
     const item = await this.teams.findAll();
     return item;
   }
+
+  async getTeam(id: number) {
+    const item = await this.teams.findByPk(id);
+    return item;
+  }
 }
