@@ -23,4 +23,25 @@ export default class MatchesService {
     });
     return items;
   }
+
+  async getProgress(inProgress: string) {
+    const items = await this.match.findOne({
+      include: [{
+        model: Team,
+        as: 'teamHome',
+        attributes: {
+          exclude: ['id'],
+        },
+      }, {
+        model: Team,
+        as: 'teamAway',
+        attributes: {
+          exclude: ['id'],
+        },
+      },
+      ],
+      where: { inProgress },
+    });
+    return items;
+  }
 }
