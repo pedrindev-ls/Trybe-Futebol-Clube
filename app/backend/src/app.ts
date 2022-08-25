@@ -1,8 +1,10 @@
 import * as express from 'express';
+import { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import ErrorInterface from './interfaces/errorInterface';
 import ThrowingError from './middlewares/errorFile';
 import loginRouter from './routes/loginRouter';
+import matchesRouter from './routes/matchesRouter';
 import teamsRouter from './routes/teamsRouter';
 
 class App {
@@ -29,12 +31,8 @@ class App {
     this.app.use(accessControl);
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamsRouter);
-    this.app.use((
-      err: ErrorInterface,
-      req: express.Request,
-      res: express.Response,
-      next: express.NextFunction,
-    ) => {
+    this.app.use('/matches', matchesRouter);
+    this.app.use((err: ErrorInterface, req: Request, res: Response, next: NextFunction) => {
       this.throwingError.takeError(err, req, res, next);
     });
   }
