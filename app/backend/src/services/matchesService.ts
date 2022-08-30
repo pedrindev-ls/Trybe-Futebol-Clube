@@ -70,4 +70,9 @@ export default class MatchesService {
     await this.match.update({ inProgress: false }, { where: { id } });
     return 'done';
   }
+
+  async updateMatch(id: number, homeTeamGoals: number, awayTeamGoals: number) {
+    await this.match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    return 'done';
+  }
 }
