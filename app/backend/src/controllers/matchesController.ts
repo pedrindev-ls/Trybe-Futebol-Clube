@@ -7,7 +7,8 @@ export default class MatchesController {
   async getAll(req: Request, res: Response): Promise<void> {
     const { inProgress } = req.query;
     if (inProgress) {
-      return this.getProgress(req, res);
+      const other = await this.getProgress(req, res);
+      return other;
     }
 
     const matches = await this.matchesService.get();
@@ -16,7 +17,9 @@ export default class MatchesController {
 
   async getProgress(req: Request, res: Response): Promise<void> {
     const { inProgress } = req.query;
-    const matches = this.matchesService.getProgress(JSON.stringify(inProgress));
+    const matches = await this.matchesService.getProgress(JSON.parse(inProgress as string));
     res.status(200).json(matches);
   }
 }
+
+// JSON.parse(inProgress as string)

@@ -24,8 +24,8 @@ export default class MatchesService {
     return items;
   }
 
-  async getProgress(inProgress: string) {
-    const items = await this.match.findOne({
+  async getProgress(inProgress: boolean) {
+    const items = await this.match.findAll({
       include: [{
         model: Team,
         as: 'teamHome',
