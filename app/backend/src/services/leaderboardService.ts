@@ -129,7 +129,12 @@ export default class LeaderboardsService {
 
   async getLeaders(teams: Teams[], matches: Matches[]) {
     const items = this.leaderBuild(teams, matches);
-    items.sort((a, b) => b.totalPoints - a.totalPoints);
+    items.sort((a, b) =>
+      b.totalPoints - a.totalPoints
+      || b.totalVictories - a.totalVictories
+      || b.goalsBalance - a.goalsBalance
+      || b.goalsFavor - a.goalsOwn
+      || a.goalsOwn - b.goalsOwn);
     return items;
   }
 }
