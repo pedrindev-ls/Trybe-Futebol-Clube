@@ -8,6 +8,7 @@
   - Express
   - NodeJS
   - Express Async Errors
+  - Docker
   
 ## Metodologias Aplicadas
   - POO
